@@ -1,0 +1,56 @@
+/* Estilos para el formulario */
+form {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  display: inline-block;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  width: 400px;
+}
+
+/* Estilos para las etiquetas de entrada y el botón de envío */
+label, input[type="submit"] {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Estilos para la casilla de verificación y su etiqueta */
+#lower input[type="checkbox"], #lower label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Estilos para el botón de envío */
+input[type="submit"] {
+  background-color: #4CAF50;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Estilos para los enlaces de "olvidó su contraseña" y la etiqueta de la casilla de verificación */
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.check {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.check:hover {
+  text-decoration: underline;
+}
