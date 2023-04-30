@@ -3,41 +3,41 @@ FROM ubuntu:20.04
 
 # Actualizar la lista de paquetes e instalar los paquetes necesarios
 RUN apt-get update && \
-	apt-get update && apt-get upgrade -y \
+	apt-get update && apt-get upgrade -y 
 		#Se instala paquete apache
-    apt-get install -y apache2 \
+RUN apt-get install -y apache2 
 		#Se instala paquete systemctl
-	apt install -y systemctl \
-	systemctl start apache2 \
-	apt-get install -y libapache2-mod-security2
+RUN apt install -y systemctl 
+RUN systemctl start apache2 
+RUN apt install -y libapache2-mod-security2
 
 COPY security2.conf /etc/apache2/mods-available
 
-RUN mkdir /etc/modsecurity/activated_rules \
-	mkdir /etc/modsecurity/base_rules 
+RUN mkdir /etc/modsecurity/activated_rules 
+RUN mkdir /etc/modsecurity/base_rules 
 
 COPY modsecurity.conf /etc/modsecurity
 
-RUN apt install git \
-	git clone https://github.com/SpiderLabs/owasp-modsecurity-crs \
-	mv /etc/modsecurity/owasp-modsecurity-crs/ /usr/share/modsecurity-crs/ \
-	cp /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
+RUN apt install git 
+RUN git clone https://github.com/SpiderLabs/owasp-modsecurity-crs 
+RUN mv /etc/modsecurity/owasp-modsecurity-crs/ /usr/share/modsecurity-crs/ 
+RUN cp /usr/share/modsecurity-crs/crs-setup.conf.example /usr/share/modsecurity-crs/crs-setup.conf
 	
 COPY owasp-crs.load /usr/share/modsecurity-crs
 	
-RUN mkdir /var/log/modsecurity \
-	systemctl restart apache2 
+RUN mkdir /var/log/modsecurity 
+RUN systemctl restart apache2 
 
 COPY apache2.conf /etc/apache2
 
-RUN ln -s /usr/share/modsecurity-crs/rules/REQUEST-912-DOS-PROTECTION.conf /etc/modsecurity/activated_rules/ \
-	systemctl restart apache2 \
-	apt install apache2-utils \
-	a2enmod cache \
-	a2enmod cache_disk \
-	a2enmod expires \
-	a2enmod headers \
-	systemctl restart apache2 
+RUN ln -s /usr/share/modsecurity-crs/rules/REQUEST-912-DOS-PROTECTION.conf /etc/modsecurity/activated_rules/ 
+RUN systemctl restart apache2 
+RUN apt install apache2-utils 
+RUN a2enmod cache 
+RUN a2enmod cache_disk 
+RUN a2enmod expires 
+RUN a2enmod headers 
+RUN systemctl restart apache2 
 
 COPY 000-default.conf /etc/apache2/sites-available
 
