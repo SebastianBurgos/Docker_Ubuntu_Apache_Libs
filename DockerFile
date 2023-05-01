@@ -4,9 +4,8 @@ FROM ubuntu:20.04
 # Actualizar la lista de paquetes e instalar los paquetes necesarios
 RUN apt-get update && \
 	apt-get update && apt-get upgrade -y 
-		#Se instala paquete apache
-RUN apt-get install -y apache2 
-		#Se instala paquete systemctl
+RUN apt install -y apache2
+ 
 RUN apt install -y systemctl 
 RUN systemctl start apache2 
 RUN apt install -y libapache2-mod-security2
